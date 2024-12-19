@@ -11,7 +11,7 @@ Data engineering test
 
 ##ORacle APEX URL
 
-App to verify the services
-Developer User:
-Workspace:
-Password:
+App to verify the services: https://apex.oracle.com/pls/apex/r/testeng/sample-data-loading/sample-data-loading?session=113444093858353
+Developer User: demo@email.com
+Workspace: testeng
+Password: CasiQueNo2025=

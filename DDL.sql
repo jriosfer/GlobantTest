@@ -30,6 +30,7 @@ ALTER TABLE department ADD CONSTRAINT department_pk PRIMARY KEY ( id );
 
 CREATE TABLE employee (
     id            INTEGER NOT NULL,
+	name          varchar2(65) NOT NULL,
     creation_date TIMESTAMP WITH LOCAL TIME ZONE NOT NULL,
     created_by    VARCHAR2(128) NOT NULL,
     updated_date  TIMESTAMP WITH LOCAL TIME ZONE,
@@ -98,29 +99,35 @@ CREATE OR REPLACE EDITIONABLE TRIGGER BIU_DEPARTMENT
     BEFORE INSERT OR UPDATE ON DEPARTMENT
 FOR EACH ROW
 BEGIN
-   if :new.CREATION_DATE is null then
-     :new.CREATION_DATE:= systimestamp;
-   end if;
-   :new.UPDATED_DATE := systimestamp;
+   if :new.CREATION_DATE is null then 
+     :new.CREATION_DATE:= systimestamp; 
+     :new.created_by := v('APP_USER');
+   end if; 
+   :new.UPDATED_DATE := systimestamp; 
+   :new.updated_by := v('APP_USER');
 END;
 /
 CREATE OR REPLACE EDITIONABLE TRIGGER BIU_JOB 
     BEFORE INSERT OR UPDATE ON JOB
 FOR EACH ROW
 BEGIN
-   if :new.CREATION_DATE is null then
-     :new.CREATION_DATE:= systimestamp;
-   end if;
-   :new.UPDATED_DATE := systimestamp;
+   if :new.CREATION_DATE is null then 
+     :new.CREATION_DATE:= systimestamp; 
+     :new.created_by := v('APP_USER');
+   end if; 
+   :new.UPDATED_DATE := systimestamp; 
+   :new.updated_by := v('APP_USER');
 END;
 /
-CREATE OR REPLACE EDITIONABLE TRIGGER BIU_EBA_EMPLOYEE
+CREATE OR REPLACE EDITIONABLE TRIGGER BIU_EMPLOYEE
     BEFORE INSERT OR UPDATE ON EMPLOYEE
 FOR EACH ROW
 BEGIN
-   if :new.CREATION_DATE is null then
-     :new.CREATION_DATE:= systimestamp;
-   end if;
-   :new.UPDATED_DATE := systimestamp;
+   if :new.CREATION_DATE is null then 
+     :new.CREATION_DATE:= systimestamp; 
+     :new.created_by := v('APP_USER');
+   end if; 
+   :new.UPDATED_DATE := systimestamp; 
+   :new.updated_by := v('APP_USER');
 END;
 /
